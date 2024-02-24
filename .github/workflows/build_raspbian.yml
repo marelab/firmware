@@ -24,6 +24,7 @@ jobs:
       - name: Upgrade python tools
         shell: bash
         run: |
+          source .env/bin/activate
           python -m pip install --upgrade pip
           pip install -U platformio adafruit-nrfutil
           pip install -U meshtastic --pre
@@ -31,6 +32,7 @@ jobs:
       - name: Upgrade platformio
         shell: bash
         run: |
+          source .env/bin/activate
           pio upgrade
 
       - name: Build Raspbian
