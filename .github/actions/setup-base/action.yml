@@ -28,6 +28,22 @@ runs:
       shell: bash
       run: |
         sudo apt-get install -y libyaml-cpp-dev
+    - name: Install opensll
+      shell: bash
+      run: |
+        sudo apt-get install -y openssl
+    - name: Install libssl-dev
+      shell: bash
+      run: |
+        sudo apt-get install -y libssl-dev
+    - name: Install libulfius-dev
+      shell: bash
+      run: |
+        sudo apt-get install -y libulfius-dev
+    - name: Install liborcania-dev
+      shell: bash
+      run: |
+        sudo apt-get install -y liborcania-dev
 
     - name: Setup Python
       uses: actions/setup-python@v4
