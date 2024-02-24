@@ -56,19 +56,17 @@ runs:
       run: |
         source .env/bin/activate
         python -m pip install --upgrade pip
-        pip install flake8 pytest
-        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   
     - name: Upgrade python tools
       shell: bash
       run: |
         source .env/bin/activate
         python -m pip install --upgrade pip
-        pip install -U platformio adafruit-nrfutil
-        pip install -U meshtastic --pre
+        python -m pip install -U platformio adafruit-nrfutil
+        python -m pip install -U meshtastic --pre
 
     - name: Upgrade platformio
       shell: bash
       run: |
         source .env/bin/activate
-        pio upgrade
+        python -m pio upgrade
