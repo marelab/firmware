@@ -46,11 +46,13 @@ runs:
         sudo apt-get install -y liborcania-dev
 
     - name: Set up Python in a virtual env
+      shell: bash
       run: |
         if [[ `uname` != "Darwin" ]]; then sudo apt -y install python3-venv; fi
         python3 -m venv .env
 
     - name: Install dependencies
+      shell: bash
       run: |
         source .env/bin/activate
         python -m pip install --upgrade pip
