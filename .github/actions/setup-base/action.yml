@@ -45,18 +45,18 @@ runs:
       run: |
         sudo apt-get install -y liborcania-dev
 
-    - name: Setup Python
-      uses: actions/setup-python@v5
-      with:
-        python-version: 3.x
+    - name: Set up Python in a virtual env
+      run: |
+        if [[ `uname` != "Darwin" ]]; then sudo apt -y install python3-venv; fi
+        python3 -m venv .env
 
-    - name: Cache python libs
-      uses: actions/cache@v3
-      id: cache-pip # needed in if test
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip
-
+    - name: Install dependencies
+      run: |
+        source .env/bin/activate
+        python -m pip install --upgrade pip
+        pip install flake8 pytest
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+  
     - name: Upgrade python tools
       shell: bash
       run: |
