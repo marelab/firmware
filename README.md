@@ -8,11 +8,10 @@
 
 ## Overview
 
-This repository contains the device firmware for the Meshtastic project.
+Developer Branch for setting up Docker Containers under Linux for meshtastic
 
-- **[Building Instructions](https://meshtastic.org/docs/development/firmware/build)**
-- **[Flashing Instructions](https://meshtastic.org/docs/getting-started/flashing-firmware/)**
+Build
+docker build -t meshtastic -f Dockerfile-LinuxBuildRun .
 
-## Stats
-
-![Alt](https://repobeats.axiom.co/api/embed/a92f097d9197ae853e780ec53d7d126e545629ab.svg "Repobeats analytics image")
+RUN
+docker run -it -p 8080:9001 meshtastic bash

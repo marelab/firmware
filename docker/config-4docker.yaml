@@ -116,7 +116,7 @@ Input:
 ###
 
 Logging:
-  LogLevel: info # debug, info, warn, error
+  LogLevel: debug #info # debug, info, warn, error
 
 Webserver:
   Port: 9001 # Port for Webserver & Webservices
