@@ -21,11 +21,14 @@ RUN apt-get update && \
 # create a non-priveleged user & group
 RUN groupadd -g 1000 mesh && useradd -ml -u 1000 -g 1000 mesh
 
+
 USER mesh
+#git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware && \
 RUN wget --inet4-only https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py -O /tmp/get-platformio.py
 RUN	chmod +x /tmp/get-platformio.py && \
 	python3 /tmp/get-platformio.py && \
-	git clone https://github.com/meshtastic/firmware --recurse-submodules /tmp/firmware && \
+	git clone https://github.com/marelab/firmware --recurse-submodules /tmp/firmware && \
+	git checkout docker && \
 	cd /tmp/firmware && \
 	chmod +x /tmp/firmware/bin/build-native.sh && \
 	source ~/.platformio/penv/bin/activate && \
