@@ -506,7 +506,7 @@ PiWebServerThread::PiWebServerThread()
         retssl = ulfius_start_secure_framework(&instanceWeb, key_pem, cert_pem);
 
         if (retssl == U_OK) {
-            LOG_INFO("Web Server framework srated on port: %i \n", webservport);
+            LOG_INFO("Web Server framework started on port: %i \n", webservport);
             LOG_INFO("Web Server root %s\n", (char *)webrootpath.c_str());
         } else {
             LOG_ERROR("Error starting Web Server framework\n");
