@@ -243,7 +243,7 @@ int handleAPIv1ToRadio(const struct _u_request *req, struct _u_response *res, vo
 
     // FIXME* Problem with portdunio loosing mountpoint maybe because of running in a real sep. thread
 
-    portduinoVFS->mountpoint("/home/marc/.portduino/default");
+    portduinoVFS->mountpoint((const char *)user_data);
 
     LOG_DEBUG("Received %d bytes from PUT request\n", s);
     webAPI.handleToRadio(buffer, s);
@@ -486,12 +486,13 @@ PiWebServerThread::PiWebServerThread()
 
         configWeb.files_path = (char *)webrootpath.c_str();
         configWeb.url_prefix = "";
+        configWeb.rootPath = (char *)portduinoVFS->mountpoint();
 
         u_map_put(instanceWeb.default_headers, "Access-Control-Allow-Origin", "*");
         // Maximum body size sent by the client is 1 Kb
         instanceWeb.max_post_body_size = 1024;
         ulfius_add_endpoint_by_val(&instanceWeb, "GET", PREFIX, "/api/v1/fromradio/*", 1, &handleAPIv1FromRadio, NULL);
-        ulfius_add_endpoint_by_val(&instanceWeb, "PUT", PREFIX, "/api/v1/toradio/*", 1, &handleAPIv1ToRadio, NULL);
+        ulfius_add_endpoint_by_val(&instanceWeb, "PUT", PREFIX, "/api/v1/toradio/*", 1, &handleAPIv1ToRadio, &configWeb.rootPath);
 
         // Add callback function to all endpoints for the Web Server
         ulfius_add_endpoint_by_val(&instanceWeb, "GET", NULL, "/*", 2, &callback_static_file, &configWeb);

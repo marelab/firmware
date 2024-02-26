@@ -1,6 +1,7 @@
 #pragma once
 #ifdef PORTDUINO_LINUX_HARDWARE
 #include "PhoneAPI.h"
+#include "PortduinoFS.h"
 #include "ulfius-cfg.h"
 #include "ulfius.h"
 #include <Arduino.h>
@@ -19,6 +20,7 @@ struct _file_config {
     struct _u_map mime_types;
     struct _u_map map_header;
     char *redirect_on_404;
+    char *rootPath;
 };
 
 class PiWebServerThread
