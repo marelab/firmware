@@ -243,6 +243,8 @@ int handleAPIv1ToRadio(const struct _u_request *req, struct _u_response *res, vo
 
     // FIXME* Problem with portdunio loosing mountpoint maybe because of running in a real sep. thread
 
+    LOG_DEBUG("MOUNTPOINT: %s \n", (const char *)user_data);
+
     portduinoVFS->mountpoint((const char *)user_data);
 
     LOG_DEBUG("Received %d bytes from PUT request\n", s);
@@ -287,8 +289,8 @@ int handleAPIv1FromRadio(const struct _u_request *req, struct _u_response *res, 
         const char *tmpa = (const char *)txBuf;
         ulfius_set_binary_body_response(res, 200, tmpa, len);
         // LOG_DEBUG("\n----webAPI response:\n");
-        LOG_DEBUG(tmpa);
-        LOG_DEBUG("\n");
+        // LOG_DEBUG(tmpa);
+        // LOG_DEBUG("\n");
     }
 
     // LOG_DEBUG("end radio->web\n", len);
@@ -486,13 +488,13 @@ PiWebServerThread::PiWebServerThread()
 
         configWeb.files_path = (char *)webrootpath.c_str();
         configWeb.url_prefix = "";
-        configWeb.rootPath = (char *)portduinoVFS->mountpoint();
+        configWeb.rootPath = strdup(portduinoVFS->mountpoint());
 
         u_map_put(instanceWeb.default_headers, "Access-Control-Allow-Origin", "*");
         // Maximum body size sent by the client is 1 Kb
         instanceWeb.max_post_body_size = 1024;
         ulfius_add_endpoint_by_val(&instanceWeb, "GET", PREFIX, "/api/v1/fromradio/*", 1, &handleAPIv1FromRadio, NULL);
-        ulfius_add_endpoint_by_val(&instanceWeb, "PUT", PREFIX, "/api/v1/toradio/*", 1, &handleAPIv1ToRadio, &configWeb.rootPath);
+        ulfius_add_endpoint_by_val(&instanceWeb, "PUT", PREFIX, "/api/v1/toradio/*", 1, &handleAPIv1ToRadio, configWeb.rootPath);
 
         // Add callback function to all endpoints for the Web Server
         ulfius_add_endpoint_by_val(&instanceWeb, "GET", NULL, "/*", 2, &callback_static_file, &configWeb);
@@ -521,6 +523,7 @@ PiWebServerThread::~PiWebServerThread()
 
     ulfius_clean_instance(&instanceService);
     ulfius_clean_instance(&instanceService);
+    free(&configWeb.rootPath);
     free(cert_pem);
     LOG_INFO("End framework");
 }
