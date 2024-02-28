@@ -44,7 +44,7 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 # - preparing yaml config for features to use
 #################################################################
 # Copy the build to home dir
-RUN cp /tmp/firmware/release/meshtasticd_linux_x86_64 /home/mesh/
+RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/
 # Creat Web Content Dir
 RUN mkdir /home/mesh/web && \
 	cd /home/mesh/web
@@ -58,6 +58,9 @@ RUN cd /home/mesh/web && \
 # Put config.yaml into /etc/meshtasticd
 RUN mkdir /etc/meshtasticd && \
 	cp /tmp/firmware/docker/config-4docker.yaml /etc/meshtasticd/config.yaml
+# Create a shared folder to persitent Meshtastis/NodeDB & Portdunio settings on the host system
+# because the container would lose all changed configuration when stoped & restarted
+# /mnt/host
 	
 #FROM frolvlad/alpine-glibc:glibc-2.31
 
@@ -68,6 +71,6 @@ RUN mkdir /etc/meshtasticd && \
 
 USER mesh
 WORKDIR /home/mesh
-CMD sh -cx "./meshtasticd_linux_x86_64 --hwid '${HWID:-$RANDOM}'"
+CMD sh -cx "./meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
 
 HEALTHCHECK NONE
