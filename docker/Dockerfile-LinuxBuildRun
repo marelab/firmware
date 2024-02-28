@@ -34,8 +34,7 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 	chmod +x /tmp/firmware/bin/build-native.sh && \
 	source ~/.platformio/penv/bin/activate && \
 	./bin/build-native.sh
-
-RUN cp /tmp/firmware/docker/startmeshs.sh /home/mesh/
+RUN cp /tmp/firmware/docker/startmesh.sh /home/mesh/
 
 
 
