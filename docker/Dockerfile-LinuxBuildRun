@@ -35,6 +35,10 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 	source ~/.platformio/penv/bin/activate && \
 	./bin/build-native.sh
 
+RUN cp /tmp/firmware/docker/startmeshs.sh /home/mesh/
+
+
+
 
 #################################################################
 # prepare stage
@@ -44,7 +48,11 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 # - preparing yaml config for features to use
 #################################################################
 # Copy the build to home dir
-RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/
+RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/ && \
+	mkdir ~/dockerhost && \
+	
+	
+
 # Creat Web Content Dir
 RUN mkdir /home/mesh/web && \
 	cd /home/mesh/web
@@ -71,6 +79,8 @@ RUN mkdir /etc/meshtasticd && \
 
 USER mesh
 WORKDIR /home/mesh
-CMD sh -cx "./meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
+CMD cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/dockerhost/meshtasticd_linux_$(arch)
+CMD source export HOME=~/dockerhost
+CMD sh -cx "~/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
 
 HEALTHCHECK NONE

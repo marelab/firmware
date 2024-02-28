@@ -11,12 +11,16 @@
 Developer Branch for setting up Docker Containers under Linux for meshtastic
 
 Build
-docker build -t meshtastic -f Dockerfile-LinuxBuildRun .
-docker build --no-cache -t meshtastic -f Dockerfile-LinuxBuildRun .
-
+docker build -v /mnt/mesh:/mnt/dockerhost -t meshtastic -f Dockerfile-LinuxBuildRun .
+docker build --no-cache -v /mnt/mesh:/mnt/dockerhost -t meshtastic -f Dockerfile-LinuxBuildRun .
 
 RUN
 docker run -it -p 8080:9001 meshtastic bash
 docker run -it -p 8080:9001 meshtastic ./meshtasticd_linux_x86_64
 docker run -it -p 8080:9001 meshtastic ./meshtasticd_linux_aarch64
-docker run -it -p 8080:9001 -v /mnt:/mnt/host meshtastic bash
+DOCKER HOST PATH -> DOCKER VM PATH
+docker run -it -p 8080:9001 -v /mnt/mesh:/mnt/dockerhost meshtastic bash
+
+docker build -v /mnt/mesh:/home/mesh/dockerhost -t meshtastic -f Dockerfile-LinuxBuildRun .
+
+docker run -it -p 8080:9001 -v $(pwd)/meshmnt:/home/mesh/dockerhost meshtastic bash
