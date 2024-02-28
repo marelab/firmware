@@ -46,7 +46,7 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 # Copy the build to home dir
 RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/ && \
     mkdir /home/mesh/dockerhost
-#RUN /tmp/firmware/docker/startmesh.sh /home/mesh/startmesh.sh	
+COPY startmesh.sh /home/mesh/startmesh.sh
 
 
 	
@@ -79,9 +79,9 @@ RUN mkdir /etc/meshtasticd && \
 
 USER mesh
 WORKDIR /home/mesh
-RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/dockerhost/
-#RUN cp /home/mesh/startmesh.sh  /home/mesh/dockerhost/
-#RUN source export HOME=~/dockerhost
+RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/dockerhost/ && \
+	cp /home/mesh/startmesh.sh  /home/mesh/dockerhost/ 
+#	source export HOME=~/dockerhost
 #CMD sh -cx "~/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
 
 HEALTHCHECK NONE
