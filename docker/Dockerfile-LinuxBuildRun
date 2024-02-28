@@ -28,7 +28,7 @@ USER mesh
 RUN wget --inet4-only https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py -O /tmp/get-platformio.py
 RUN	chmod +x /tmp/get-platformio.py && \
 	python3 /tmp/get-platformio.py 
-ARG CACHEBUST=1
+ARG CACHEBUST=0
 RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-submodules /tmp/firmware && \
 	cd /tmp/firmware && \
 	chmod +x /tmp/firmware/bin/build-native.sh && \
@@ -46,7 +46,7 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 # Copy the build to home dir
 RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/ && \
 	mkdir ~/dockerhost
-RUN cp /tmp/firmware/docker/startmesh.sh /home/mesh/
+RUN cp /tmp/firmware/docker/startmesh.sh /home/mesh/startmesh.sh
 	
 	
 
@@ -76,8 +76,9 @@ RUN mkdir /etc/meshtasticd && \
 
 USER mesh
 WORKDIR /home/mesh
-CMD cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/dockerhost/meshtasticd_linux_$(arch)
-CMD source export HOME=~/dockerhost
-CMD sh -cx "~/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
+RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/dockerhost/
+RUN cp /home/mesh/startmesh.sh  /home/mesh/dockerhost/
+#RUN source export HOME=~/dockerhost
+#CMD sh -cx "~/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'"
 
 HEALTHCHECK NONE
