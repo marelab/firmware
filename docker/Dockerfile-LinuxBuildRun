@@ -28,7 +28,7 @@ USER mesh
 RUN wget --inet4-only https://raw.githubusercontent.com/platformio/platformio-core-installer/master/get-platformio.py -O /tmp/get-platformio.py
 RUN	chmod +x /tmp/get-platformio.py && \
 	python3 /tmp/get-platformio.py 
-ARG CACHEBUST=0
+ARG CACHEBUST=1
 RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-submodules /tmp/firmware && \
 	cd /tmp/firmware && \
 	chmod +x /tmp/firmware/bin/build-native.sh && \
@@ -46,7 +46,7 @@ RUN	git clone https://github.com/marelab/firmware --branch docker --recurse-subm
 # Copy the build to home dir
 RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/ && \
 	mkdir ~/dockerhost
-RUN cp /tmp/firmware/docker/startmesh.sh /home/mesh/startmesh.sh
+
 	
 	
 
@@ -63,6 +63,8 @@ RUN cd /home/mesh/web && \
 # Put config.yaml into /etc/meshtasticd
 RUN mkdir /etc/meshtasticd && \
 	cp /tmp/firmware/docker/config-4docker.yaml /etc/meshtasticd/config.yaml
+RUN cp /tmp/firmware/docker/startmesh.sh /home/mesh/startmesh.sh
+
 # Create a shared folder to persitent Meshtastis/NodeDB & Portdunio settings on the host system
 # because the container would lose all changed configuration when stoped & restarted
 # /mnt/host
