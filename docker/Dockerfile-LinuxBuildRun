@@ -49,6 +49,7 @@ RUN cp /tmp/firmware/release/meshtasticd_linux_$(arch) /home/mesh/ && \
 COPY startmesh.sh /home/mesh/startmesh.sh
 
 
+
 	
 
 # Creat Web Content Dir
@@ -64,7 +65,7 @@ RUN cd /home/mesh/web && \
 # Put config.yaml into /etc/meshtasticd
 RUN mkdir /etc/meshtasticd && \
 	cp /tmp/firmware/docker/config-4docker.yaml /etc/meshtasticd/config.yaml
-
+RUN chown mesh:mesh /home/mesh/startmesh.sh
 
 # Create a shared folder to persitent Meshtastis/NodeDB & Portdunio settings on the host system
 # because the container would lose all changed configuration when stoped & restarted
