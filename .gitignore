@@ -36,3 +36,4 @@ src/mesh/raspihttp/certificate.pem
 src/mesh/raspihttp/private_key.pem
 docker/meshmnt/.portduino/default/prefs/channels.proto
 docker/meshmnt/.portduino/default/prefs/db.proto
+docker/meshmnt/core

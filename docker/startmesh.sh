@@ -19,7 +19,7 @@ while true; do
 
 	case $option in
 	1)
-		sh -cx "$HOME/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'--config '$HOME/config-dist.yaml'"
+		sh -cx "$HOME/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}'-c '$HOME/config-dist.yaml'"
 		;;
 	2)
 		sh -cx "$HOME/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}' -c '$HOME/config.yaml'"
