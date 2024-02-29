@@ -22,7 +22,7 @@ while true; do
 		sh -cx "$HOME/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}' -c $HOME/config-dist.yaml"
 		;;
 	2)
-		sh -cx "$HOME/meshtasticd_linux_$(arch) --hwid '${HWID:-$RANDOM}' -c $HOME/config.yaml"
+		sh -cx "$HOME/meshtasticd_linux_$(arch) -c $HOME/config.yaml"
 		;;
 	3)
 		echo "Exit Script..."

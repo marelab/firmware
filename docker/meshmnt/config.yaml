@@ -120,5 +120,5 @@ Logging:
   LogLevel: debug # debug, info, warn, error
 
 Webserver:
-  RootPath: /home/marc/web
+  RootPath: /home/mesh/web
   Port: 9000
