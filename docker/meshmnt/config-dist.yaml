@@ -104,4 +104,8 @@ Input:
 ###
 
 Logging:
-  LogLevel: info # debug, info, warn, error
+  LogLevel: debug # debug, info, warn, error
+
+Webserver:
+  RootPath: /home/mesh/web
+  Port: 9000
