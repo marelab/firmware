@@ -1,19 +1,21 @@
 ### Define your devices here using Broadcom pin numbering Uncomment the block that corresponds to your hardware
 #---
 Lora:
-  #ONLY RECV
-  #  Module: sx1262  # Waveshare SX126X XXXM
-  #  CS: 7
-  #  IRQ: 17
-  #  Reset: 22
-  #  spidev: spidev0.0
-  #  DIO3_TCXO_VOLTAGE: true
-  Module: sx1262 # Waveshare SX126X XXXM
+#ONLY RECV
+#  Module: sx1262  # Waveshare SX126X XXXM
+#  CS: 7
+#  IRQ: 17
+#  Reset: 22
+#  spidev: spidev0.0
+#  DIO3_TCXO_VOLTAGE: true
+  Module: sx1262  # Waveshare SX126X XXXM
   DIO2_AS_RF_SWITCH: true
   CS: 21
   IRQ: 16
   Busy: 20
   Reset: 18
+
+
 
 #  Module: sx1262  # Waveshare SX1302 LISTEN ONLY AT THIS TIME!
 #  CS: 7
@@ -21,7 +23,7 @@ Lora:
 #  Reset: 22
 
 # module(hal, cs, irq, rst, busy)
-# Module::Module(RadioLibHal *hal, uint32_t cs, uint32_t irq, uint32_t rst, uint32_t gpio) : csPin(cs), irqPin(irq), rstPin(rst), gpioPin(gpio)
+# Module::Module(RadioLibHal *hal, uint32_t cs, uint32_t irq, uint32_t rst, uint32_t gpio) : csPin(cs), irqPin(irq), rstPin(rst), gpioPin(gpio) 
 #  SX1261 radio = new Module(hal, 7, 17, 22, RADIOLIB_NC);
 # new Module(hal, 7, 17, 22, RADIOLIB_NC);
 #  Module: sx1262  # pinedio

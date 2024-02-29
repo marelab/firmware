@@ -37,3 +37,9 @@ src/mesh/raspihttp/private_key.pem
 docker/meshmnt/.portduino/default/prefs/channels.proto
 docker/meshmnt/.portduino/default/prefs/db.proto
 docker/meshmnt/core
+docker/meshmnt/.viminfo
+docker/meshmnt/core
+docker/meshmnt/meshtasticd_linux_aarch64
+docker/meshmnt/core
+docker/meshmnt/core
+docker/meshmnt/core
