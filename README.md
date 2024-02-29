@@ -24,3 +24,6 @@ docker run -it -p 8080:9001 -v /mnt/mesh:/mnt/dockerhost meshtastic bash
 docker build -v /mnt/mesh:/home/mesh/dockerhost -t meshtastic -f Dockerfile-LinuxBuildRun .
 
 docker run -it -p 8080:9001 -v $(pwd)/meshmnt:/home/mesh/dockerhost meshtastic bash
+
+docker build -t meshtastic -f Dockerfile-LinuxBuildRun .
+docker run -it -p 8080:9001 -v $(pwd)/meshmnt:/home/mesh/dockerhost meshtastic bash
