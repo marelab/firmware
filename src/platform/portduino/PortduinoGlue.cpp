@@ -45,6 +45,7 @@ static error_t parse_opt(int key, char *arg, struct argp_state *state)
         break;
     case 'c':
         configPath = arg;
+        printf("Using base path file %s\n", configPath);
         break;
     case ARGP_KEY_ARG:
         return 0;
