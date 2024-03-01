@@ -81,9 +81,9 @@ I2C:
 ### Set up SPI displays here. Note that I2C displays are generally auto-detected.
 
 Display:
-  Panel: X11
-  Width: 800
-  Height: 600
+#  Panel: X11
+#  Width: 800
+#  Height: 600
 ### Waveshare 2.8inch RPi LCD
 #  Panel: ST7789
 #  CS: 8
@@ -114,7 +114,7 @@ Touchscreen:
 ### Configure device for direct keyboard input
 
 Input:
-  KeyboardDevice: /dev/input/event0
+#  KeyboardDevice: /dev/input/event0
 
 ###
 
